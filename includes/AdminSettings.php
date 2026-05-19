@@ -60,7 +60,7 @@ class AdminSettings {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
 			\esc_url( \admin_url( 'options-general.php?page=url-blocker' ) ),
-			\esc_html__( 'Settings', 'url-blocker' )
+			\esc_html__( 'Settings', 'easy-url-blocker' )
 		);
 
 		array_unshift( $links, $settings_link );
@@ -73,10 +73,10 @@ class AdminSettings {
 	 */
 	public function add_settings_page(): void {
 		\add_options_page(
-			\__( 'URL Blocker', 'url-blocker' ),
-			\__( 'URL Blocker', 'url-blocker' ),
+			\__( 'URL Blocker', 'easy-url-blocker' ),
+			\__( 'URL Blocker', 'easy-url-blocker' ),
 			'manage_options',
-			'url-blocker',
+			'easy-url-blocker',
 			array( $this, 'render_settings_page' )
 		);
 	}
@@ -91,16 +91,14 @@ class AdminSettings {
 
 		// Capability check first — reject unauthorised users before touching the nonce.
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to do that.', 'url-blocker' ) );
+			\wp_die( \esc_html__( 'You do not have permission to do that.', 'easy-url-blocker' ) );
 		}
 
 		\check_admin_referer( 'urlb_save_settings', 'urlb_nonce' );
 
-		$raw_urls     = isset( $_POST['urlb_blocked_urls'] ) ? $_POST['urlb_blocked_urls'] : '';
-		$blocked_urls = \sanitize_textarea_field( \wp_unslash( $raw_urls ) );
+		$blocked_urls = \sanitize_textarea_field( \wp_unslash( $_POST['urlb_blocked_urls'] ?? '' ) );
 
-		$raw_dest    = isset( $_POST['urlb_redirect_url'] ) ? $_POST['urlb_redirect_url'] : '';
-		$redirect_to = \esc_url_raw( \wp_unslash( $raw_dest ) );
+		$redirect_to = \esc_url_raw( \sanitize_text_field( \wp_unslash( $_POST['urlb_redirect_url'] ?? '' ) ) );
 
 		$exclude_admins = isset( $_POST['urlb_exclude_admins'] ) ? '1' : '0';
 
@@ -117,7 +115,7 @@ class AdminSettings {
 		\wp_safe_redirect(
 			\add_query_arg(
 				array(
-					'page'    => 'url-blocker',
+					'page'    => 'easy-url-blocker',
 					'updated' => '1',
 				),
 				\admin_url( 'options-general.php' )

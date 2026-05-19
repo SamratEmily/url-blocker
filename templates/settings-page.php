@@ -14,11 +14,11 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="wrap">
-	<h1><?php esc_html_e( 'URL Blocker Settings', 'url-blocker' ); ?></h1>
+	<h1><?php esc_html_e( 'URL Blocker Settings', 'easy-url-blocker' ); ?></h1>
 
-	<?php if ( isset( $_GET['updated'] ) && '1' === $_GET['updated'] ) : ?>
+	<?php if ( '1' === filter_input( INPUT_GET, 'updated', FILTER_SANITIZE_NUMBER_INT ) ) : ?>
 		<div class="notice notice-success is-dismissible">
-			<p><?php esc_html_e( 'Settings saved.', 'url-blocker' ); ?></p>
+			<p><?php esc_html_e( 'Settings saved.', 'easy-url-blocker' ); ?></p>
 		</div>
 	<?php endif; ?>
 
@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 			<tr>
 				<th scope="row">
 					<label for="urlb_blocked_urls">
-						<?php esc_html_e( 'Blocked URLs', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Blocked URLs', 'easy-url-blocker' ); ?>
 					</label>
 				</th>
 				<td>
@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) || exit;
 /private/"
 					><?php echo esc_textarea( $blocked_urls ); ?></textarea>
 					<p class="description">
-						<?php esc_html_e( 'Enter one relative URL per line (e.g. /secret-page/). The path is matched exactly, with or without a trailing slash.', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Enter one relative URL per line (e.g. /secret-page/). The path is matched exactly, with or without a trailing slash.', 'easy-url-blocker' ); ?>
 					</p>
 				</td>
 			</tr>
@@ -53,20 +53,20 @@ defined( 'ABSPATH' ) || exit;
 			<tr>
 				<th scope="row">
 					<label for="urlb_redirect_type">
-						<?php esc_html_e( 'Redirect Action', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Redirect Action', 'easy-url-blocker' ); ?>
 					</label>
 				</th>
 				<td>
 					<select id="urlb_redirect_type" name="urlb_redirect_type">
 						<option value="custom" <?php selected( $redirect_type, 'custom' ); ?>>
-							<?php esc_html_e( 'Custom URL (302 redirect)', 'url-blocker' ); ?>
+							<?php esc_html_e( 'Custom URL (302 redirect)', 'easy-url-blocker' ); ?>
 						</option>
 						<option value="404" <?php selected( $redirect_type, '404' ); ?>>
-							<?php esc_html_e( 'Not Found (404 page)', 'url-blocker' ); ?>
+							<?php esc_html_e( 'Not Found (404 page)', 'easy-url-blocker' ); ?>
 						</option>
 					</select>
 					<p class="description">
-						<?php esc_html_e( 'Choose what happens when a blocked URL is requested.', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Choose what happens when a blocked URL is requested.', 'easy-url-blocker' ); ?>
 					</p>
 				</td>
 			</tr>
@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 			<tr id="urlb_custom_url_row">
 				<th scope="row">
 					<label for="urlb_redirect_url">
-						<?php esc_html_e( 'Redirect Destination URL', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Redirect Destination URL', 'easy-url-blocker' ); ?>
 					</label>
 				</th>
 				<td>
@@ -87,14 +87,14 @@ defined( 'ABSPATH' ) || exit;
 						placeholder="https://example.com or /home"
 					/>
 					<p class="description">
-						<?php esc_html_e( 'Visitors will be sent here with a 302 redirect. Only used when "Custom URL" is selected above.', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Visitors will be sent here with a 302 redirect. Only used when "Custom URL" is selected above.', 'easy-url-blocker' ); ?>
 					</p>
 				</td>
 			</tr>
 
 			<tr>
 				<th scope="row">
-					<?php esc_html_e( 'Exclude Admins', 'url-blocker' ); ?>
+					<?php esc_html_e( 'Exclude Admins', 'easy-url-blocker' ); ?>
 				</th>
 				<td>
 					<label for="urlb_exclude_admins">
@@ -105,14 +105,14 @@ defined( 'ABSPATH' ) || exit;
 							value="1"
 							<?php checked( '1', $exclude_admins ); ?>
 						/>
-						<?php esc_html_e( 'Do not block logged-in administrators (users with the "manage_options" capability).', 'url-blocker' ); ?>
+						<?php esc_html_e( 'Do not block logged-in administrators (users with the "manage_options" capability).', 'easy-url-blocker' ); ?>
 					</label>
 				</td>
 			</tr>
 
 		</table>
 
-		<?php submit_button( __( 'Save Settings', 'url-blocker' ), 'primary', 'urlb_save' ); ?>
+		<?php submit_button( __( 'Save Settings', 'easy-url-blocker' ), 'primary', 'urlb_save' ); ?>
 	</form>
 </div>
 
