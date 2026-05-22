@@ -21,16 +21,16 @@ A lightweight WordPress plugin that lets administrators block specific relative 
 
 ## Installation
 
-1. Clone or download this repository into `/wp-content/plugins/url-blocker/`.
+1. Clone or download this repository into `/wp-content/plugins/pathguard-redirects/`.
 2. Activate the plugin from **Plugins → Installed Plugins**.
-3. Navigate to **Settings → URL Blocker** (or click the **Settings** link on the Plugins page).
+3. Navigate to **Settings → PathGuard Redirects** (or click the **Settings** link on the Plugins page).
 4. Add the paths to block, choose a redirect action, and click **Save Settings**.
 
 ## Directory Structure
 
 ```
-url-blocker/
-├── url-blocker.php          # Bootstrap: plugin header, constants, activation/deactivation hooks
+pathguard-redirects/
+├── pathguard-redirects.php          # Bootstrap: plugin header, constants, activation/deactivation hooks
 ├── includes/
 │   ├── AdminSettings.php    # Admin menu, save handler, settings page renderer
 │   └── URLB_Blocker.php     # Frontend redirect logic (template_redirect hook)

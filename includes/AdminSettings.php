@@ -45,7 +45,7 @@ class AdminSettings {
 		\add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		\add_action( 'admin_init', array( $this, 'handle_save' ) );
 		\add_filter(
-			'plugin_action_links_' . \plugin_basename( URLB_PATH . 'url-blocker.php' ),
+			'plugin_action_links_' . \plugin_basename( URLB_PATH . 'pathguard-redirects.php' ),
 			array( $this, 'add_settings_link' )
 		);
 	}
@@ -59,8 +59,8 @@ class AdminSettings {
 	public function add_settings_link( array $links ): array {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
-			\esc_url( \admin_url( 'options-general.php?page=url-blocker' ) ),
-			\esc_html__( 'Settings', 'easy-url-blocker' )
+			\esc_url( \admin_url( 'options-general.php?page=pathguard-redirects' ) ),
+			\esc_html__( 'Settings', 'pathguard-redirects' )
 		);
 
 		array_unshift( $links, $settings_link );
@@ -73,10 +73,10 @@ class AdminSettings {
 	 */
 	public function add_settings_page(): void {
 		\add_options_page(
-			\__( 'URL Blocker', 'easy-url-blocker' ),
-			\__( 'URL Blocker', 'easy-url-blocker' ),
+			\__( 'PathGuard Redirects', 'pathguard-redirects' ),
+			\__( 'PathGuard Redirects', 'pathguard-redirects' ),
 			'manage_options',
-			'easy-url-blocker',
+			'pathguard-redirects',
 			array( $this, 'render_settings_page' )
 		);
 	}
@@ -91,7 +91,7 @@ class AdminSettings {
 
 		// Capability check first — reject unauthorised users before touching the nonce.
 		if ( ! \current_user_can( 'manage_options' ) ) {
-			\wp_die( \esc_html__( 'You do not have permission to do that.', 'easy-url-blocker' ) );
+			\wp_die( \esc_html__( 'You do not have permission to do that.', 'pathguard-redirects' ) );
 		}
 
 		\check_admin_referer( 'urlb_save_settings', 'urlb_nonce' );
@@ -115,7 +115,7 @@ class AdminSettings {
 		\wp_safe_redirect(
 			\add_query_arg(
 				array(
-					'page'    => 'easy-url-blocker',
+					'page'    => 'pathguard-redirects',
 					'updated' => '1',
 				),
 				\admin_url( 'options-general.php' )

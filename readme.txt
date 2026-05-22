@@ -1,4 +1,4 @@
-=== Easy URL Blocker ===
+=== PathGuard Redirects ===
 Contributors:      emily50
 Tags:              redirect, url-blocker, access-control, security, block-pages
 Requires at least: 5.8
@@ -41,7 +41,7 @@ Add the relative paths you want to block (one per line) and choose what should h
 
 == Installation ==
 
-1. Upload the `url-blocker` folder to `/wp-content/plugins/`.
+1. Upload the `pathguard-redirects` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** screen in WordPress.
 3. Go to **Settings → URL Blocker** (or click the **Settings** link on the Plugins page).
 4. Enter the relative URLs you want to block, choose a redirect action, and click **Save Settings**.
